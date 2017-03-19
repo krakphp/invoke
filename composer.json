@@ -1,0 +1,21 @@
+{
+    "name": "krak/invoke",
+    "description": "Invocation Utility",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "RJ Garcia",
+            "email": "rj@bighead.net"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Krak\\Invoke\\": "src"
+        }
+    },
+    "require-dev": {
+        "krak/cargo": "^0.2.1",
+        "peridot-php/peridot": "^1.19"
+    }
+}
