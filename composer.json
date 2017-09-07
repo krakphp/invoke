@@ -15,7 +15,7 @@
         }
     },
     "require-dev": {
-        "krak/cargo": "^0.2.1",
+        "krak/cargo": "^0.2.4",
         "peridot-php/peridot": "^1.19"
     }
 }

@@ -45,6 +45,18 @@ $invoke->invoke('service'); // will invoke the function returned from the contai
 $invoke->invoke('str_repeat', 'a', 10); // if not in container, will try to normally invoke
 ```
 
+#### Container with Separator
+
+In addition to just invoking services, you can invoke service object methods if you pass in a separator into the container factory method.
+
+```php
+<?php
+
+$container['service'] = function() { return new ArrayObject([1]); };
+$invoke = Invoke\ContainerInvoke::createWithSeparator($container, '@');
+$invoke->invoke('service@count'); // retrieves the service and invokes the count method which outputs 1 in this case
+```
+
 ### Method Invoke
 
 ```php

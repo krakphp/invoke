@@ -36,14 +36,23 @@ describe('Krak Invoke', function() {
         });
     });
     describe('ContainerInvoke', function() {
-        it('will check if string is part of container', function() {
-            $c = Krak\Cargo\container();
-            $service = function() { return 1; };
-            $c['service'] = function() use ($service) {
-                return $service;
+        beforeEach(function() {
+            $c = Krak\Cargo\liteContainer();
+            $c['service'] = function() {
+                return function() { return 1; };
             };
-            $invoke = Invoke\ContainerInvoke::create($c->toInterop());
-            assert($invoke->invoke('service'));
+            $c['ArrayObject'] = function() {
+                return new ArrayObject([1]);
+            };
+            $this->container = $c->toInterop();
+        });
+        it('will check if string is part of container', function() {
+            $invoke = Invoke\ContainerInvoke::create($this->container);
+            assert($invoke->invoke('service') === 1);
+        });
+        it('will invoke a service with method if a separator is given', function() {
+            $invoke = Invoke\ContainerInvoke::createWithSeparator($this->container, '@');
+            assert($invoke->invoke('ArrayObject@count') === 1);
         });
     });
 });
